@@ -1,10 +1,7 @@
-library(igraph)
+library(mutationtree)
 library(magrittr)
 library(dplyr)
 library(ggplot2)
-# You'll also need dplyr and assertthat
-
-# TODO: mutationtree package
 
 # TODO:
 # * helper function to create node?
