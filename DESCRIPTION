@@ -1,10 +1,27 @@
 Package: mutationtree
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Tree-based model of mutation dynamics
 Version: 0.1
 Date: 2015-03-04
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: c(person(family="Connelly", given="Brian", email="bdc@bconnelly.net",
+role=c("aut", "cre")))
+Maintainer: Brian Connelly <bdc@bconnelly.net>
+Description: The mutationtree package contains a simulation model and additional
+    tools for studying mutation dynamics
+License: BSD_2_clause + file LICENSE
 LazyData: TRUE
+URL: https://github.com/briandconnelly/mutationtree
+BugReports: https://github.com/briandconnelly/mutationtree/issues
+ByteCompile: no
+NeedsCompilation: no
+VignetteBuilder: knitr
+Depends:
+    R (>= 3.0.0)
+Imports:
+    assertthat,
+    dplyr,
+    igraph,
+    magrittr
+Suggests:
+    knitr,
+    ggplot2
