@@ -1,3 +1,5 @@
+#' Remove extinct leaf nodes from the population graph
+#' @export
 prune <- function(population)
 {
     # Prune extinct leaf nodes
