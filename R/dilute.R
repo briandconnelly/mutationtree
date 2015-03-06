@@ -6,4 +6,5 @@ dilute <- function(population, dfactor)
     igraph::V(population)$abundance <- rbinom(n=length(curr_abundance),
                                               size=curr_abundance,
                                               prob=dfactor)
+    return(population)
 }
