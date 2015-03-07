@@ -1,8 +1,18 @@
+#' Mutate individuals in the population
+#'
+#' \code{mutate}
+#'
+#' @param population A mutationtree population
+#' @param mu The mutation rate
+#' @return A modified mutationtree population
+#'
+#' @export
 mutate <- function(population, mu)
 {
     # TODO: how to pass in distribution info? function ptr?
 
     assertthat::assert_that(mu >= 0)
+    assertthat::assert_that(mu <= 1)
 
     # Get the number of mutatnts for each type and remove mutants from their
     # original genotype vertex (this seems to work)
@@ -21,6 +31,7 @@ mutate <- function(population, mu)
                                                       last_seen=NA,
                                                       level=igraph::V(population)$level[ix] + 1,
                                                       abundance=1,
+                                                      effect_size=e,
                                                       fitness=max(0, 1 + e),
                                                       num_beneficial=igraph::V(population)[ix]$num_beneficial + ifelse(e > 0, 1, 0),
                                                       num_deleterious=igraph::V(population)[ix]$num_deleterious + ifelse(e < 0, 1, 0))

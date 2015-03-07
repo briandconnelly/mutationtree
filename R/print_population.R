@@ -1,3 +1,10 @@
+#' Print information about the mutationtree population
+#'
+#' \code{print_population} prints some basic information about the population
+#'
+#' @param population A mutationtree population
+#' @export
+#'
 print_population <- function(population)
 {
     extant_ix <- igraph::V(population)$abundance > 0

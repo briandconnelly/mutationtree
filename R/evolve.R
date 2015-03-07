@@ -1,10 +1,37 @@
-evolve <- function(population, generations=1, start=1, population_size, mutation_rate)
+#' Evolve a population for a number of generations
+#'
+#' \code{evolve} subjects the given population to a number of rounds of evolution. During this process,
+#' the population first reproduces via \code{\link{reproduce}}, creating the next generation.
+#'
+#' @param population A mutationtree population
+#' @param generations The number of generations to evolve (positive integer, default: 1)
+#' @param start Start generation number (default: 1)
+#' @param population_size The size of the resulting population. Since reproduction is
+#' done stochastically, the resulting population may not be this exact value.
+#' @param mutation_rate Rate at which mutations arise
+#' @param progress_bar Whether or not to show a progress bar (default: True)
+#' @return A modified mutationtree population
+#'
+#' @note This function simply calls \code{\link{reproduce}},
+#' \code{\link{mutate}}, and then \code{\link{prune}} on the population for the
+#' specified number of cycles (generations).
+#'
+#' @seealso \code{\link{reproduce}}
+#' @seealso \code{\link{mutate}}
+#' @seealso \code{\link{prune}}
+#'
+#' @export
+evolve <- function(population, generations=1, start=1, population_size,
+                   mutation_rate, progress_bar=TRUE)
 {
     assertthat::assert_that(generations > 0)
+    assertthat::is.count(generations)
     assertthat::assert_that(population_size > 0)
+    assertthat::is.count(population_size)
     assertthat::assert_that(mutation_rate >= 0)
+    assertthat::assert_that(mutation_rate <= 1)
 
-    p <- dplyr::progress_estimated(generations, min_time=0)
+    if(progress_bar) p <- dplyr::progress_estimated(generations, min_time=0)
 
     for (gen in seq_len(generations) + start)
     {
@@ -16,7 +43,7 @@ evolve <- function(population, generations=1, start=1, population_size, mutation
             mutate(mu=mutation_rate) %>%
             prune()
 
-        p$tick()$print()
+        if(progress_bar) p$tick()$print()
     }
 
     return(population)

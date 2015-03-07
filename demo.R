@@ -24,7 +24,7 @@ MUTATION_RATE <- 1e-5
 LAMBDA <- 12
 
 # Create a population and evolve it.
-evolved_pop <- create_population(size=POPSIZE, fitness=BASE_FITNESS) %>%
+evolved_pop <- create_population(size=POPSIZE, base_fitness=BASE_FITNESS) %>%
     evolve(generations=GENERATIONS, population_size=POPSIZE, mutation_rate=MUTATION_RATE)
 
 results <- get.data.frame(x=evolved_pop, what='vertices')

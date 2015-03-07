@@ -1,7 +1,7 @@
 Package: mutationtree
 Type: Package
 Title: Tree-based model of mutation dynamics
-Version: 0.1
+Version: 0.0.1
 Date: 2015-03-04
 Authors@R: c(person(family="Connelly", given="Brian", email="bdc@bconnelly.net", role=c("aut", "cre")))
 Maintainer: Brian Connelly <bdc@bconnelly.net>
