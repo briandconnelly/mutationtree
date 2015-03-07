@@ -11,8 +11,7 @@ mutate <- function(population, mu)
 {
     # TODO: how to pass in distribution info? function ptr?
 
-    assertthat::assert_that(mu >= 0)
-    assertthat::assert_that(mu <= 1)
+    assertthat::assert_that(is_between_zeroone(mu))
 
     # Get the number of mutatnts for each type and remove mutants from their
     # original genotype vertex (this seems to work)

@@ -12,7 +12,7 @@
 #' @export
 reproduce <- function(population, popsize)
 {
-    assertthat::assert_that(popsize > 0)
+    assertthat::assert_that(assertthat::is.count(popsize))
 
     freqdep <- igraph::V(population)$fitness * igraph::V(population)$abundance
     igraph::V(population)$abundance <- rbinom(n=igraph::vcount(population),

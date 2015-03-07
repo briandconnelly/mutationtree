@@ -24,12 +24,9 @@
 evolve <- function(population, generations=1, start=1, population_size,
                    mutation_rate, progress_bar=TRUE)
 {
-    assertthat::assert_that(generations > 0)
-    assertthat::is.count(generations)
-    assertthat::assert_that(population_size > 0)
-    assertthat::is.count(population_size)
-    assertthat::assert_that(mutation_rate >= 0)
-    assertthat::assert_that(mutation_rate <= 1)
+    assertthat::assert_that(assertthat::is.count(generations), generations > 0)
+    assertthat::assert_that(assertthat::is.count(population_size), population_size > 0)
+    assertthat::assert_that(is_between_zeroone(mutation_rate))
 
     if(progress_bar) p <- dplyr::progress_estimated(generations, min_time=0)
 
