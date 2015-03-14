@@ -9,7 +9,7 @@
 #' @param population_size The size of the resulting population. Since reproduction is
 #' done stochastically, the resulting population may not be this exact value.
 #' @param mutation_rate Rate at which mutations arise
-#' @param progress_bar Whether or not to show a progress bar (default: True)
+#' @param progress Whether or not to show a progress bar (default: TRUE for interactive sessions, FALSE otherwise)
 #' @return A modified mutationtree population
 #'
 #' @note This function simply calls \code{\link{reproduce}},
@@ -22,13 +22,13 @@
 #'
 #' @export
 evolve <- function(population, generations=1, start=1, population_size,
-                   mutation_rate, progress_bar=TRUE)
+                   mutation_rate, progress=interactive())
 {
     assertthat::assert_that(assertthat::is.count(generations), generations > 0)
     assertthat::assert_that(assertthat::is.count(population_size), population_size > 0)
     assertthat::assert_that(is_between_zeroone(mutation_rate))
 
-    if(progress_bar) p <- dplyr::progress_estimated(generations, min_time=0)
+    if(progress) p <- dplyr::progress_estimated(generations, min_time=0)
 
     for (gen in seq_len(generations) + start)
     {
@@ -40,7 +40,7 @@ evolve <- function(population, generations=1, start=1, population_size,
             mutate(mu=mutation_rate) %>%
             prune()
 
-        if(progress_bar) p$tick()$print()
+        if(progress) p$tick()$print()
     }
 
     return(population)
