@@ -1,6 +1,7 @@
 library(mutationtree)
 library(magrittr)
 library(dplyr)
+library(igraph)
 library(ggplot2)
 
 # TODO:
