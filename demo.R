@@ -4,29 +4,23 @@ library(dplyr)
 library(igraph)
 library(ggplot2)
 
-# TODO:
-# * helper function to create node?
-# * function to compare two vertices (used to see what mutation(s) separates node and its parent for example)
-# * function given a node that returns the list of vertex IDs down to the root (and to the leaf, if applicable)
-# * generate fitness distribution from resulting population?
-# * class(evolved_pop) returns the class name. Functions could assert that population arg is right kind of class
-#    * set class of population to mtpopulation or something: check with "mtpop" %in% class(evolved_pop)
-
-# movie: fitness distribution over time
-# movie: distribution of #beneficial mutations over time
-
-
 #set.seed(21)
 
-GENERATIONS <- 40
-POPSIZE <- 1e7
-BASE_FITNESS <- 1
-MUTATION_RATE <- 1e-5
-LAMBDA <- 12
+GENERATIONS <- 40           # Number of generations to evolve for
+POPSIZE <- 1e7              # Size of the population
+BASE_FITNESS <- 1           # Base fitness for individuals
+MUTATION_RATE <- 1e-5       # Mutation Rate
+LAMBDA <- 12                # lambda param for exponential distribution of fitness effects
 
 # Create a population and evolve it.
-evolved_pop <- create_population(size=POPSIZE, base_fitness=BASE_FITNESS) %>%
-    evolve(generations=GENERATIONS, population_size=POPSIZE, mutation_rate=MUTATION_RATE)
+evolved_pop <- create_population(size = POPSIZE, base_fitness=BASE_FITNESS) %>%
+    evolve(generations = GENERATIONS, population_size = POPSIZE,
+           mutation_rate = MUTATION_RATE)
 
+# Get a data frame containing information about the evolved population (and
+# ancestors of extant genotypes)
 results <- get.data.frame(x=evolved_pop, what='vertices')
-ggplot(filter(results, abundance > 0), aes(x=fitness)) + geom_histogram()
+
+# Plot the distribution of fitnesses among extant types
+ggplot(data = filter(results, abundance > 0), aes(x = fitness)) +
+    geom_histogram()
